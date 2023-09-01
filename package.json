@@ -1,5 +1,5 @@
 {
-  "name": "key-identity-adapter",
+  "name": "@tanglelabs/key-identity-adapter",
   "version": "0.1.0",
   "description": "did:key adapter",
   "main": "index.js",
