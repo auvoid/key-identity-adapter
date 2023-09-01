@@ -308,7 +308,7 @@ did-jwt-vc@^3.2.6:
     did-jwt "^7.2.0"
     did-resolver "^4.1.0"
 
-did-jwt@^7.2.0:
+did-jwt@^7.2.0, did-jwt@^7.2.6:
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/did-jwt/-/did-jwt-7.2.6.tgz#ba04cc544934c4700df3b7b1733289e42c95d349"
   integrity sha512-7EjP5zEAUrKHCnz7Dwft1HmtXKcWn4nTCTaYHEuzi7ywI+6VEx6kjCHlxwQK7wZ+5lUQPRvM32eIgW1aEDoERQ==

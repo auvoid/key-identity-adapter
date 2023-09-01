@@ -9,6 +9,7 @@
   "type": "module",
   "dependencies": {
     "@tanglelabs/ssimon": "^0.5.1",
+    "did-jwt": "^7.2.6",
     "did-jwt-vc": "^3.2.6",
     "dids": "^4.0.4",
     "key-did-provider-ed25519": "^3.0.2",
