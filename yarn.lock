@@ -300,6 +300,14 @@ dag-jose-utils@^3.0.0:
     "@ipld/dag-cbor" "^7.0.1"
     multiformats "^11.0.1"
 
+did-jwt-vc@^3.2.6:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/did-jwt-vc/-/did-jwt-vc-3.2.6.tgz#4e884c29509cac7a3757d495a5eb62c6bae07d26"
+  integrity sha512-mecquxDqPMra0BAMFh8JfRNI2TGCgptqJdiLDxEQFyY1KtxLGgKQ2D6n1DSETX39XuR3YAWLGTT6aUAb7v8cWA==
+  dependencies:
+    did-jwt "^7.2.0"
+    did-resolver "^4.1.0"
+
 did-jwt@^7.2.0:
   version "7.2.6"
   resolved "https://registry.yarnpkg.com/did-jwt/-/did-jwt-7.2.6.tgz#ba04cc544934c4700df3b7b1733289e42c95d349"
