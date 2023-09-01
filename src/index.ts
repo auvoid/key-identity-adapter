@@ -31,12 +31,27 @@ export class DidKeyAdapter implements NetworkAdapter {
     store: StorageSpec<any, any>;
     private constructor() {}
 
-    public static async build(options: NetworkAdapterOptions) {
+    /**
+     * Create a new instance of network adapter
+     *
+     * @param {NetworkAdapterOptions} options
+     * @returns {Promise<DidKeyAdapter>}
+     */
+
+    public static async build(
+        options: NetworkAdapterOptions
+    ): Promise<DidKeyAdapter> {
         const adapter = new DidKeyAdapter();
         adapter.store = options.driver;
         return adapter;
     }
 
+    /**
+     * Create a new DID and store in the store defined with the adapter
+     *
+     * @param {CreateDidProps} props
+     * @returns {Promise<DidCreationResult>}
+     */
     async createDid<T extends StorageSpec<Record<string, any>, any>>(
         props: CreateDidProps<T>
     ): Promise<DidCreationResult> {
@@ -55,6 +70,13 @@ export class DidKeyAdapter implements NetworkAdapter {
         return { identity, seed: seed ?? generatedSeed };
     }
 
+    /**
+     * Deserialize a DID and return the DID config result
+     *
+     * @param {IdentityConfig} config
+     * @param {T} store
+     * @returns {Promise<DidCreationResult>}
+     */
     async deserializeDid<T extends StorageSpec<Record<string, any>, any>>(
         config: IdentityConfig,
         store: T
@@ -74,7 +96,15 @@ export class DidKeyAccount implements IdentityAccount {
     account: DID;
     keyPair: nacl.BoxKeyPair;
 
-    public static async build(props: IdentityAccountProps<any>) {
+    /**
+     * Create a new DID Account class
+     *
+     * @param {IdentityAccountProps} props
+     * @returns {Promise<DidKeyAccount>}
+     */
+    public static async build(
+        props: IdentityAccountProps<any>
+    ): Promise<DidKeyAccount> {
         const { seed, store } = props;
 
         const keyPair = nacl.box.keyPair.fromSecretKey(stringToBytes(seed));
@@ -97,16 +127,33 @@ export class DidKeyAccount implements IdentityAccount {
         return account;
     }
 
+    /**
+     * Get back the did string
+     *
+     * @returns {string}
+     */
     getDid(): string {
         return this.account.id;
     }
+
+    /**
+     * Get back the did document
+     *
+     * @returns {Record<string, any>}
+     */
     async getDocument(): Promise<Record<string, any>> {
         return this.account.resolve(this.account.id);
     }
 
+    /**
+     * Create a verifiable presentation
+     *
+     * @param {string[]} credentials
+     * @returns {Promise<{ vpPayload: Record<string, any>; presentationJwt: string }>}
+     */
     async createPresentation(
         credentials: string[]
-    ): Promise<Record<string, any>> {
+    ): Promise<{ vpPayload: Record<string, any>; presentationJwt: string }> {
         const key =
             bytesToString(this.keyPair.secretKey) +
             bytesToString(this.keyPair.publicKey);
@@ -145,6 +192,13 @@ export class DidKeyCredentialsManager<
 
     private constructor() {}
 
+    /**
+     * Create a new instance o DidKeyCredentialsManager
+     *
+     * @param {T} store
+     * @param {DidKeyAccount} account
+     * @returns
+     */
     public static async build<T extends StorageSpec<Record<string, any>, any>>(
         store: T,
         account: DidKeyAccount
@@ -154,12 +208,26 @@ export class DidKeyCredentialsManager<
         credentialsManager.account = account;
         return credentialsManager;
     }
+
+    /**
+     * Check if the credential is valid, sans DVID Proof
+     *
+     * @param {{ cred: string }} credential
+     * @returns {Promise<boolean>}
+     */
     async isCredentialValid(
         credential: Record<string, unknown>
     ): Promise<boolean> {
         const result = await this.verify(credential);
         return result.vc;
     }
+
+    /**
+     * Check if the credential is valid
+     *
+     * @param {{ cred: string }} credential
+     * @returns {Promise<IVerificationResult>}
+     */
     async verify(
         credential: Record<string, unknown>
     ): Promise<IVerificationResult> {
@@ -170,6 +238,12 @@ export class DidKeyCredentialsManager<
         return { vc: true, dvid: true };
     }
 
+    /**
+     * Create a new credential to issue
+     *
+     * @param {CreateCredentialProps} options
+     * @returns {Promise<Record<string, any>>}
+     */
     async create(options: CreateCredentialProps): Promise<Record<string, any>> {
         const { id, recipientDid, body, type } = options;
 
@@ -207,6 +281,7 @@ export class DidKeyCredentialsManager<
 
         return { cred: jwt };
     }
+
     revoke(keyIndex: number): Promise<void> {
         throw new Error("Method not implemented.");
     }
