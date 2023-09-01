@@ -19,10 +19,12 @@
     "tweetnacl-util": "^0.15.1"
   },
   "scripts": {
-    "dev": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --trace-warnings --loader ts-node/esm' src/test.ts"
+    "dev": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --trace-warnings --loader ts-node/esm' src/test.ts",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/node": "^20.5.7",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
   }
 }
