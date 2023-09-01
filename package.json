@@ -5,5 +5,21 @@
   "main": "index.js",
   "repository": "https://github.com/tangle-labs/key-identity-adapter",
   "author": "Coodos <info@coodos.co>",
-  "license": "MIT"
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@tanglelabs/ssimon": "^0.5.1",
+    "dids": "^4.0.4",
+    "key-did-provider-ed25519": "^3.0.2",
+    "key-did-resolver": "^3.0.0",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-util": "^0.15.1"
+  },
+  "scripts": {
+    "dev": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --trace-warnings --loader ts-node/esm' src/test.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.7",
+    "ts-node": "^10.9.1"
+  }
 }
