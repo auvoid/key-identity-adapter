@@ -1,0 +1,9 @@
+{
+  "name": "key-identity-adapter",
+  "version": "0.1.0",
+  "description": "did:key adapter",
+  "main": "index.js",
+  "repository": "https://github.com/tangle-labs/key-identity-adapter",
+  "author": "Coodos <info@coodos.co>",
+  "license": "MIT"
+}
