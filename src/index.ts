@@ -1,5 +1,6 @@
 import {
     CreateCredentialProps,
+    CreateBadgeProps,
     CreateDidProps,
     CredentialsManager,
     DidCreationResult,
@@ -26,6 +27,8 @@ import {
 import * as didJWT from "did-jwt";
 import * as KeyResolver from "key-did-resolver";
 import { Resolver } from "did-resolver";
+import { Validator } from "jsonschema";
+import { OpenBadgeSchema } from "./ob-schema";
 
 export class DidKeyAdapter implements NetworkAdapter {
     store: StorageSpec<any, any>;
@@ -59,6 +62,7 @@ export class DidKeyAdapter implements NetworkAdapter {
 
         const generatedKeyPair = nacl.box.keyPair();
         const generatedSeed = bytesToString(generatedKeyPair.secretKey);
+        console.log(seed ?? generatedSeed);
 
         const identity = await DidKeyAccount.build({
             seed: seed ?? generatedSeed,
@@ -107,6 +111,7 @@ export class DidKeyAccount implements IdentityAccount {
     ): Promise<DidKeyAccount> {
         const { seed, store } = props;
 
+        console.log(seed);
         const keyPair = nacl.box.keyPair.fromSecretKey(stringToBytes(seed));
         const provider = new Ed25519Provider(stringToBytes(seed));
 
@@ -277,6 +282,81 @@ export class DidKeyCredentialsManager<
                 },
             },
         };
+        const jwt = await createVerifiableCredentialJwt(credential, vcIssuer);
+
+        return { cred: jwt };
+    }
+
+    async createBadge(options: CreateBadgeProps) {
+        const {
+            id,
+            recipientDid,
+            body,
+            type,
+            image,
+            issuerName,
+            criteria,
+            description,
+        } = options;
+
+        const key =
+            bytesToString(this.account.keyPair.secretKey) +
+            bytesToString(this.account.keyPair.publicKey);
+        const keyUint8Array = stringToBytes(key);
+
+        const signer = didJWT.EdDSASigner(keyUint8Array);
+        const didId =
+            this.account.getDid() +
+            "#" +
+            this.account.getDid().split("did:key:")[1];
+        const vcIssuer = {
+            did: didId,
+            signer,
+            alg: "EdDSA",
+        };
+        const types = Array.isArray(type) ? [...type] : [type];
+        const credential: JwtCredentialPayload = {
+            sub: recipientDid,
+            nbf: Math.floor(Date.now() / 1000),
+            id,
+            vc: {
+                "@context": [
+                    "https://www.w3.org/2018/credentials/v1",
+                    "https://purl.imsglobal.org/spec/ob/v3p0/schema/json/ob_v3p0_achievementcredential_schema.json",
+                ],
+                type: ["VerifiableCredential", "OpenBadgeCredential"],
+                id,
+                name: type,
+                issuer: {
+                    id: new URL("/", id).toString(),
+                    type: ["Profile"],
+                    name: issuerName,
+                },
+                issuanceDate: new Date(Date.now()).toISOString(),
+                credentialSubject: {
+                    type: ["AchievementSubject"],
+                    achievement: {
+                        id: id,
+                        type: "",
+                        criteria: {
+                            narrative: criteria,
+                        },
+                        name: type,
+                        description: description,
+                        image: {
+                            id: image,
+                            type: "Image",
+                        },
+                        ...body,
+                    },
+                },
+            },
+        };
+
+        const validator = new Validator();
+        const result = validator.validate(credential.vc, OpenBadgeSchema);
+        if (result.errors.length > 0)
+            throw new Error("Schema Validation Failed");
         const jwt = await createVerifiableCredentialJwt(credential, vcIssuer);
 
         return { cred: jwt };

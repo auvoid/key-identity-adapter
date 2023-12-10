@@ -200,10 +200,10 @@
     "@stablelib/wipe" "^1.0.1"
     "@stablelib/xchacha20" "^1.0.1"
 
-"@tanglelabs/ssimon@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@tanglelabs/ssimon/-/ssimon-0.5.1.tgz#79c7c2b2250d7c07627466f60947fb60549e6995"
-  integrity sha512-oge9UVdY3iV41c5fdGVdeoIlz1whDDZCf1ymbKrLL031zbo00dc8bC/8zVH7LZWsWmHhx8CSfKmuZ6pTjcE6yQ==
+"@tanglelabs/ssimon@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@tanglelabs/ssimon/-/ssimon-0.5.2.tgz#c96af85138f8431e826ccf7530621594430b65e1"
+  integrity sha512-+5YoKR288ntPD7DMwtRIPciR6GnOX19YG2gkN5B+9FIUOSXljMnBSMG4xUVNpScPLJ9MzYqpmgrUM5NJWFWo1w==
   dependencies:
     crypto-js "^4.1.1"
 
@@ -353,6 +353,11 @@ fast-json-stable-stringify@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/fast-json-stable-stringify/-/fast-json-stable-stringify-2.1.0.tgz#874bf69c6f404c2b5d99c481341399fd55892633"
   integrity sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==
+
+jsonschema@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.4.1.tgz#cc4c3f0077fb4542982973d8a083b6b34f482dab"
+  integrity sha512-S6cATIPVv1z0IlxdN+zUk5EPjkGCdnhN4wVSBlvoUO1tOLJootbo9CquNJmbIh4yikWHiUedhRYrNPn1arpEmQ==
 
 key-did-provider-ed25519@^3.0.2:
   version "3.0.2"
