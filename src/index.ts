@@ -270,7 +270,6 @@ export class DidKeyCredentialsManager<
         const credential: JwtCredentialPayload = {
             sub: recipientDid,
             nbf: Math.floor(Date.now() / 1000),
-            exp: Math.floor(Date.now() / 1000) + 30,
             id,
             vc: {
                 "@context": ["https://www.w3.org/2018/credentials/v1"],
@@ -281,6 +280,8 @@ export class DidKeyCredentialsManager<
                 },
             },
         };
+        if (options.expiryDate) credential.exp = options.expiryDate;
+
         const jwt = await createVerifiableCredentialJwt(credential, vcIssuer);
 
         return { cred: jwt };
@@ -351,6 +352,8 @@ export class DidKeyCredentialsManager<
                 },
             },
         };
+
+        if (options.expiryDate) credential.exp = options.expiryDate;
 
         const validator = new Validator();
         const result = validator.validate(credential.vc, OpenBadgeSchema);
