@@ -49,6 +49,10 @@ export class DidKeyAdapter implements NetworkAdapter {
         return adapter;
     }
 
+    getMethodIdentifier() {
+        return "key";
+    }
+
     /**
      * Create a new DID and store in the store defined with the adapter
      *
@@ -62,7 +66,6 @@ export class DidKeyAdapter implements NetworkAdapter {
 
         const generatedKeyPair = nacl.box.keyPair();
         const generatedSeed = bytesToString(generatedKeyPair.secretKey);
-        console.log(seed ?? generatedSeed);
 
         const identity = await DidKeyAccount.build({
             seed: seed ?? generatedSeed,
@@ -111,7 +114,6 @@ export class DidKeyAccount implements IdentityAccount {
     ): Promise<DidKeyAccount> {
         const { seed, store } = props;
 
-        console.log(seed);
         const keyPair = nacl.box.keyPair.fromSecretKey(stringToBytes(seed));
         const provider = new Ed25519Provider(stringToBytes(seed));
 
@@ -258,12 +260,8 @@ export class DidKeyCredentialsManager<
         const keyUint8Array = stringToBytes(key);
 
         const signer = didJWT.EdDSASigner(keyUint8Array);
-        const didId =
-            this.account.getDid() +
-            "#" +
-            this.account.getDid().split("did:key:")[1];
         const vcIssuer = {
-            did: didId,
+            did: this.account.getDid(),
             signer,
             alg: "EdDSA",
         };
@@ -282,6 +280,8 @@ export class DidKeyCredentialsManager<
                 },
             },
         };
+        if (options.expiryDate) credential.exp = options.expiryDate;
+
         const jwt = await createVerifiableCredentialJwt(credential, vcIssuer);
 
         return { cred: jwt };
@@ -352,6 +352,8 @@ export class DidKeyCredentialsManager<
                 },
             },
         };
+
+        if (options.expiryDate) credential.exp = options.expiryDate;
 
         const validator = new Validator();
         const result = validator.validate(credential.vc, OpenBadgeSchema);
