@@ -1,6 +1,6 @@
 {
   "name": "@tanglelabs/key-identity-adapter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "did:key adapter",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
@@ -14,6 +14,7 @@
     "did-jwt-vc": "^3.2.6",
     "did-resolver": "^4.1.0",
     "dids": "^4.0.4",
+    "fix-esm-import-path": "^1.5.0",
     "jsonschema": "^1.4.1",
     "key-did-provider-ed25519": "^3.0.2",
     "key-did-resolver": "^3.0.0",
@@ -22,7 +23,7 @@
   },
   "scripts": {
     "dev": "nodemon --watch './**/*.ts' --exec 'node --experimental-specifier-resolution=node --trace-warnings --loader ts-node/esm' src/test.ts",
-    "build": "tsc"
+    "build": "tsc; fix-esm-import-path ./dist"
   },
   "devDependencies": {
     "@types/node": "^20.5.7",
