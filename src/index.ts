@@ -149,7 +149,7 @@ export class DidKeyAccount implements IdentityAccount {
      * @returns {Record<string, any>}
      */
     async getDocument(): Promise<Record<string, any>> {
-        return this.account.resolve(this.account.id);
+        return (await this.account.resolve(this.account.id)).didDocument;
     }
 
     /**
