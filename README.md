@@ -20,17 +20,17 @@ $ yarn add @tanglelabs/ssimon @tanglelabs/key-identity-adapter
 
 ```ts
 (async () => {
-    const manager = await IdentityManager.build({
-        adapter: DidKeyAdapter,
-        storage,
-    });
+  const manager = await IdentityManager.build({
+    adapter: DidKeyAdapter,
+    storage,
+  });
 
-    const did = await manager.createDid({
-        alias: "asdf",
-        store,
-    });
+  const did = await manager.createDid({
+    alias: "asdf",
+    store,
+  });
 
-    console.log(did.getDid());
+  console.log(did.getDid());
 })();
 ```
 
