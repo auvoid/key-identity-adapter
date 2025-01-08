@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@tanglelabs/ssimon':
-        specifier: 0.8.1
-        version: 0.8.1
+        specifier: 0.8.3
+        version: 0.8.3
       did-jwt:
         specifier: ^7.2.6
         version: 7.4.7
@@ -174,8 +174,8 @@ packages:
   '@stablelib/wipe@1.0.1':
     resolution: {integrity: sha512-WfqfX/eXGiAd3RJe4VU2snh/ZPwtSjLG4ynQ/vYzvghTh7dHFcI1wl+nrkWG6lGhukOxOsUHfv8dUXr58D0ayg==}
 
-  '@tanglelabs/ssimon@0.8.1':
-    resolution: {integrity: sha512-cn7Gj2emibqXVOKeSrAg8CqlwegH2CH0FuXKgAl9Eq30I/2G60GEPD3lZCMx+GDOmGyEepxLIAKFqlvf5WX6vw==}
+  '@tanglelabs/ssimon@0.8.3':
+    resolution: {integrity: sha512-ymnPVyDP4tdZEzZA71AEmcezPwzbpstHDVDVV5ZDhfosqGLyQ44gbpvYuGPRP/sWJUeLgmNTnbL+CJjfhsaLMA==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -316,6 +316,10 @@ packages:
     resolution: {integrity: sha512-IyEq64AdS6lUwtn3YSvGpu7KAGA2x5+fjRCUIa8+ccSLmWrODV/ICM5aa6hHV/19EPWef8/e322r9sQJJ6/3qA==}
     engines: {node: '>=14.14'}
 
+  key-did-resolver@4.0.0:
+    resolution: {integrity: sha512-+U2nd/0rjO4Yqe2hnHBD7ygcLRfT43Oje9IIjv1BlBi0lopwxZpIFQ7GekguOHK02r+JGdl8mpJVNHs5lvXVOA==}
+    engines: {node: '>=14.14'}
+
   make-error@1.3.6:
     resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
 
@@ -393,6 +397,9 @@ packages:
 
   uint8arrays@4.0.10:
     resolution: {integrity: sha512-AnJNUGGDJAgFw/eWu/Xb9zrVKEGlwJJCaeInlf3BkecE/zcTobk5YXYIPNQJO1q5Hh1QZrQQHf0JvcHqz2hqoA==}
+
+  uint8arrays@5.1.0:
+    resolution: {integrity: sha512-vA6nFepEmlSKkMBnLBaUMVvAC4G3CTmO58C12y4sq6WPDOR7mOFYOi7GlrQ4djeSbP6JG9Pv9tJDM97PedRSww==}
 
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
@@ -557,7 +564,7 @@ snapshots:
 
   '@stablelib/wipe@1.0.1': {}
 
-  '@tanglelabs/ssimon@0.8.1':
+  '@tanglelabs/ssimon@0.8.3':
     dependencies:
       '@sd-jwt/crypto-nodejs': 0.9.1
       '@sd-jwt/sd-jwt-vc': 0.9.1
@@ -568,6 +575,7 @@ snapshots:
       did-jwt-vc: 4.0.4
       did-resolver: 4.1.0
       jsonschema: 1.4.1
+      key-did-resolver: 4.0.0
     transitivePeerDependencies:
       - supports-color
 
@@ -719,6 +727,13 @@ snapshots:
       uint8arrays: 4.0.10
       varint: 6.0.0
 
+  key-did-resolver@4.0.0:
+    dependencies:
+      '@noble/curves': 1.7.0
+      multiformats: 13.3.1
+      uint8arrays: 5.1.0
+      varint: 6.0.0
+
   make-error@1.3.6: {}
 
   ms@2.1.3: {}
@@ -785,6 +800,10 @@ snapshots:
   uint8arrays@4.0.10:
     dependencies:
       multiformats: 12.1.3
+
+  uint8arrays@5.1.0:
+    dependencies:
+      multiformats: 13.3.1
 
   undici-types@6.19.8: {}
 
