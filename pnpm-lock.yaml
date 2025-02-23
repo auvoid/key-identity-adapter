@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@tanglelabs/ssimon':
-        specifier: 0.8.3
-        version: 0.8.3
+        specifier: 1.0.0
+        version: 1.0.0
       did-jwt:
         specifier: ^7.2.6
         version: 7.4.7
@@ -174,8 +174,8 @@ packages:
   '@stablelib/wipe@1.0.1':
     resolution: {integrity: sha512-WfqfX/eXGiAd3RJe4VU2snh/ZPwtSjLG4ynQ/vYzvghTh7dHFcI1wl+nrkWG6lGhukOxOsUHfv8dUXr58D0ayg==}
 
-  '@tanglelabs/ssimon@0.8.3':
-    resolution: {integrity: sha512-ymnPVyDP4tdZEzZA71AEmcezPwzbpstHDVDVV5ZDhfosqGLyQ44gbpvYuGPRP/sWJUeLgmNTnbL+CJjfhsaLMA==}
+  '@tanglelabs/ssimon@1.0.0':
+    resolution: {integrity: sha512-E4WJNiD8eaqmDMLC3WIw2dBlqDPDElGyFa1HL9S3D9lgwxpvyXs4fk1+rSwvXQ68Ml+Z9ib04EoacKXidTvkRQ==}
 
   '@tsconfig/node10@1.0.11':
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}
@@ -564,7 +564,7 @@ snapshots:
 
   '@stablelib/wipe@1.0.1': {}
 
-  '@tanglelabs/ssimon@0.8.3':
+  '@tanglelabs/ssimon@1.0.0':
     dependencies:
       '@sd-jwt/crypto-nodejs': 0.9.1
       '@sd-jwt/sd-jwt-vc': 0.9.1

@@ -1,6 +1,6 @@
 {
   "name": "@tanglelabs/key-identity-adapter",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "description": "did:key adapter",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
@@ -9,7 +9,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@tanglelabs/ssimon": "0.8.4",
+    "@tanglelabs/ssimon": "1.0.0",
     "did-jwt": "^7.2.6",
     "did-jwt-vc": "^3.2.6",
     "did-resolver": "^4.1.0",
